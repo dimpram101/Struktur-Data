@@ -1,34 +1,47 @@
 package test1;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Test {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    String[] list = scan.nextLine().split(",");
-    ArrayList<Integer> newList = new ArrayList<>(); 
+  /*Function to sort array using insertion sort*/
+  void sort(int arr[])
+  {
+      int n = arr.length;
+      for (int i = 1; i < n; ++i) {
+          int key = arr[i];
+          int j = i - 1;
 
-    for (String x : list) {
-      newList.add(Integer.valueOf(x));
-    }
-
-    for (int i = 0; i < newList.size()-1; i++) {
-      for (int j = 0; j < newList.size()-1; j++) {
-        if(newList.get(j) > newList.get(j+1)) {
-          int temp = newList.get(j);
-          newList.set(j, newList.get(j+1));
-          newList.set(j+1, temp);
-        }
+          /* Move elements of arr[0..i-1], that are
+             greater than key, to one position ahead
+             of their current position */
+          while (j >= 0 && arr[j] > key) {
+              arr[j + 1] = arr[j];
+              j = j - 1;
+          }
+          arr[j + 1] = key;
       }
-    }
+  }
 
-    for (int i = 0; i < newList.size(); i++) {
-      if(i == newList.size()-1) {
-        System.out.print(newList.get(i));
-      } else {
-        System.out.print(newList.get(i) + ",");
-      }
-    }
+  /* A utility function to print array of size n*/
+  static void printArray(int arr[])
+  {
+      int n = arr.length;
+      for (int i = 0; i < n; ++i)
+          System.out.print(arr[i] + " ");
+
+      System.out.println();
+  }
+
+  // Driver method
+  public static void main(String args[])
+  {
+      int arr[] = new TestList().getList();
+
+      Test ob = new Test();
+      long start = System.currentTimeMillis();
+      
+      ob.sort(arr);
+
+      float elapsedTime = (System.currentTimeMillis() - start)/1000F;
+
+      System.out.println("Execute time : " + elapsedTime);
   }
 }

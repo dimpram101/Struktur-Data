@@ -2,13 +2,14 @@ package test1;
 
 public class Sorting {
   private LinkedList list;
+  private int length;
 
   public Sorting(LinkedList currentList) {
     this.list = currentList;
+    this.length = currentList.getLength();
   }
   
   public void bubbleSort(){
-    int length = this.list.getLength();
     for(int i = 0; i < length - 1; i++){
       for(int j = 0; j < length - 1; j++) {
         Node node = this.list.findNode(j);
@@ -23,7 +24,6 @@ public class Sorting {
   }
 
   public void insertionSort() {
-    int length = this.list.getLength();
     for (int i = 1; i < length; i++){
       Node removedNode = this.list.remove(i);
       Node prevRemovedNode = removedNode.getPrev();
@@ -33,14 +33,12 @@ public class Sorting {
         insertIndex -= 1;
       }
       this.list.insert(removedNode, insertIndex + 1);
-      System.out.println(this.list);
     }
   }
 
   public void selectionSort(){
     Node toBeSwapped, minimum, nextMinimum;
-    int length = this.list.getLength();
-
+  
     for (int i = 0; i < length; i++ ){
       toBeSwapped = minimum = this.list.findNode(i);
       nextMinimum = minimum.getNext();

@@ -1,5 +1,3 @@
-package test1;
-
 public class QuickSort {
   LinkedList list;
   int length;

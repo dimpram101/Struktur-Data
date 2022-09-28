@@ -1,5 +1,3 @@
-package test1;
-
 public class MainMerge {
     public static void main(String[] args) {
         int[] inputArr = {23, 12, 34, 66, 10, 65, 8};

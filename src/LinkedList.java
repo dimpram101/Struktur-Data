@@ -1,5 +1,3 @@
-package test1;
-
 public class LinkedList {
   private Node first;
   private Node last;

@@ -1,5 +1,3 @@
-package test1;
-
 public class Node {
   private int value;
   private Node next, prev;

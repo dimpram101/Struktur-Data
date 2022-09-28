@@ -1,5 +1,3 @@
-package test1;
-
 public class Sorting {
   private LinkedList list;
   private int length;

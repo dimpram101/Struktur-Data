@@ -29,5 +29,4 @@ public class Node {
   public Node getPrev() {
     return this.prev;
   }
-
 }

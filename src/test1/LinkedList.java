@@ -96,7 +96,6 @@ public class LinkedList {
       this.last.setNext(node);
       node.setPrev(this.last);
       this.last = node;
-      System.out.println(this.last.getNext());
     } else {
       Node currentNode = this.findNode(index);
       Node currentPrevNode = currentNode.getPrev();

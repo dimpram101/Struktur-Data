@@ -1,3 +1,4 @@
+package main;
 public class MergeSort {
 
     private int[] array;

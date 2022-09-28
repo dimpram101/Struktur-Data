@@ -1,3 +1,4 @@
+package main;
 public class QuickSort {
   LinkedList list;
   int length;

@@ -1,3 +1,13 @@
+## Struktur Data
+
+Hallo, ini merupakan repository dari Kelompok 3 Struktur Data kelas B.
+Anggota Kelompok 3:
+- Amalia Kartika
+- Darrell Rajendra Wibowo
+- Dimas Pramudya
+- Hengki Agung Prayoga
+- Yoga Tiara Wiguna
+
 ## Getting Started
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.

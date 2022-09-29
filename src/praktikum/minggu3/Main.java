@@ -2,16 +2,46 @@ package praktikum.minggu3;
 
 public class Main {
   public static void main(String[] args) {
-    LinkedList linkedList = new LinkedList();
+    LinkedList list = new LinkedList();
+    list.add("P");
+    list.add("A");
+    list.add("S");
+    list.add("A");
+    list.add("A");
 
-    linkedList.add(8);
-    linkedList.add(1);
-    linkedList.add(3);
-    linkedList.add(4);
-    linkedList.add(9);
+    list.showAll();
 
-    System.out.println(linkedList);
-    System.out.println(linkedList.findNode(5).getValue());
+    list.insert("L", 2);
+    list.showAll();
 
+    list.remove(5);
+    list.showAll();
+
+    list.swap(4, 0);
+    list.showAll();
+
+    list.remove(2);
+    list.showAll();
+
+    list.add("A");
+    list.showAll();
+
+    list.removeByValue("L");
+
+    // list.add("B"); list.showAll();
+    // list.add("A"); list.showAll();
+
+    // list.add("B"); list.showAll();
+    // list.add("A"); list.showAll();
+    // list.add("B"); list.showAll();
+    // list.add("A"); list.showAll();
+
+    // list.removeDuplicat();
+
+    // list.showAll();
+
+    // list.tailToHead();
+
+    // list.showAll();
   }
 }

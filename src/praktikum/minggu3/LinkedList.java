@@ -126,7 +126,12 @@ public class LinkedList {
     }
 
     public void tailToHead() {
-   
+        int j = length - 1;
+
+        for(int i = 0; i < Math.floor(length / 2); i++) {
+            swap(i, j);
+            j--;
+        }
     }
 
     public void showAll() {

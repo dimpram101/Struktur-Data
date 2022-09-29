@@ -48,13 +48,17 @@ public class LinkedList {
         currentNode = this.first;
         for(int i = 0; i < this.length; i++) {
             if(!(currentNode.getValue()).equals(value)){
+                if(currentNode.getNext() == null) {
+                    currentNode = null;
+                    break;
+                }
                 currentNode = currentNode.getNext();
             }
             else {
                 break;
             }
         }
-        
+
         return currentNode;
     }
 
@@ -189,21 +193,29 @@ public class LinkedList {
     }
 
     public void removeByValue(String value) {
-        Node currentNode = this.findNodeByValue(value);
+        Node currentNode;
 
-        if(currentNode.getNext() != null) {
-            currentNode.getPrev().setNext(currentNode.getNext());
-            Node prevNode = currentNode.getPrev();
-            Node nextNode = currentNode.getNext();
-            nextNode.setPrev(prevNode);
-        } 
+        for(int i = 0; i < this.length - 1; i++) {
+            currentNode = this.findNodeByValue(value);
 
-        else {
-            currentNode.getPrev().setNext(null);
-            this.last = currentNode.getPrev();
+            if(currentNode == null) {
+                break;
+            }
+
+            if(currentNode.getNext() != null) {
+                currentNode.getPrev().setNext(currentNode.getNext());
+                Node prevNode = currentNode.getPrev();
+                Node nextNode = currentNode.getNext();
+                nextNode.setPrev(prevNode);
+            } 
+    
+            else {
+                currentNode.getPrev().setNext(null);
+                this.last = currentNode.getPrev();
+            }
+    
+            this.length--;
         }
-
-        length--;
     }
 
     public void removeByNode(Node node) {

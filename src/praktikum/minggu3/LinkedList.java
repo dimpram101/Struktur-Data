@@ -1,108 +1,145 @@
 package praktikum.minggu3;
 
+import java.util.function.Function;
+
 public class LinkedList {
-    private Node first;
-    private Node last;
+    public Node first;
     private int length;
-    
+
     public LinkedList() {
         this.first = null;
-        this.last = null;
         this.length = 0;
     }
 
-    public int getLength(){
-        return this.length;
-      }
-    
-      public Node getFirst(){
-        return this.first;
-      }
-    
-      public Node getLast(){
-        return this.last;
-    }
-
     public Node findNode(int index) {
-        Node currentNode;
-    
-        if (index == 0 ) { 
-          return this.first;
+        if (index < length && index >= 0) {
+            Node currentNode = this.first;
+            for(int i = 0; i < index; i++) {
+            currentNode = currentNode.getNext();
+            }
+            // System.out.print(currentNode.getValue());
+            return currentNode;
+        } else {
+            return null;
         }
-    
-        if (index == length-1) {
-          return this.last;
-        }
-    
-        currentNode = this.first;
-        for (int i = 0; i < index; i++) {
-          currentNode = currentNode.getNext();
-        }
-    
-        return currentNode;
     }
 
-    public void add(int value) {
+    public void add(String value) {
         Node newNode = new Node(value);
-        
         if(this.first == null) {
-            this.first = this.last = newNode;
+            this.first = newNode;
+        } else {
+            Node lastNode = this.findNode(length-1);
+            lastNode.setNext(newNode);
         }
-        else {
-            newNode.setPrev(this.last);
-            this.last.setNext(newNode);
-            this.last = newNode;
+        length++;
+    }
+
+    public void insert(String value, int index) {
+        if (index < length && index >= 0) {
+            if (index == 0) {
+                Node node = new Node(value);
+                node.setNext(this.first);
+                this.first = node;
+            } else {
+                Node temp = new Node(value);
+                Node beforeIndexNode = findNode(index-1);
+                Node indexNode = beforeIndexNode.getNext();
+    
+                beforeIndexNode.setNext(temp);
+                beforeIndexNode.getNext().setNext(indexNode);
+            }
+
+            length++;
         }
-        
-        this.length++;
+    }
+
+    public void remove(int index) {
+        if (index < length && index >= 0) {
+            if (index == 0) {
+                Node temp = this.first;
+                this.first = temp.getNext();
+                
+            } else {
+                Node beforeIndexNode = findNode(index-1);
+                Node afterIndexNode = beforeIndexNode.getNext().getNext();
+                beforeIndexNode.setNext(afterIndexNode);
+            }
+
+            length--;
+        }
     }
 
     public void swap(int index1, int index2) {
-        Node node1;
-        Node node2;
-        Node tempNode;
+        if (index1 < length && index2 < length && index1 >= 0 && index2 >= 0) {
+            Node firstNode = findNode(index1);
+            Node secondNode = findNode(index2);
+    
+            insert(secondNode.getValue(), index1);
+            remove(index1+1);
+    
+            insert(firstNode.getValue(), index2);
+            remove(index2+1);
+        }
+    }
 
-        if(length < index1 || index1 < 0 || length < index2 || index2 < 0) {
-          throw new ArrayIndexOutOfBoundsException();
+    public String get(int index) {
+        if (index < length && index >= 0) {
+    
+            Node indexNode = findNode(index);
+            return indexNode.getValue();
+        } else {
+            return "";
         }
-    
-        node1 = this.findNode(index1);
-        node2 = this.findNode(index2);
-    
-        if(node1 == this.first) {
-          this.first = node2;
-        } 
-        else if (node2 == this.first) {
-          this.first = node1;
+    }
+
+    public void deleteValue(String value) {
+      
+    }
+
+    public void deleteDuplicate() {
+        int lengthOfLinkedList = length;
+        Node primaryNode = first;
+
+        for (int i = 0; i < lengthOfLinkedList; i++) {
+            String value = primaryNode.getValue();
+            Node comperNode = first; 
+
+            for (int j = 0; j < i; j++) {
+                if (value == comperNode.getValue()) {
+                    remove(j);
+                }
+                comperNode = comperNode.getNext();
+            }
+
+            primaryNode = primaryNode.getNext();
         }
-    
-        if(node1 == this.last) {
-          this.last = node2;
-        } 
-        else if (node2 == this.last) {
-          this.last = node1;
+    }
+
+    public void tailToHead() {
+
+    }
+
+    public void showAll() {
+        Node currentNode = this.first;
+        for (int i = 0; i < length; i++) {
+            System.out.print(currentNode.getValue());
+            currentNode = currentNode.getNext();
         }
-    
-        tempNode = node1.getNext();
-        node1.setNext(node2.getNext());
-        node2.setNext(tempNode);
-    
-        if (node1.getNext() != null) {
-          node1.getNext().setPrev(node1);
-        }
-        if (node2.getNext() != null) {
-          node2.getNext().setPrev(node2);
-        }
-    
-        tempNode = node1.getPrev();
-        node1.setPrev(node2.getPrev());
-        node2.setPrev(tempNode);
-    
-        if (node1.getPrev() != null) {
-          node1.getPrev().setNext(node1);
-        } 
-        if (node2.getPrev() != null) {
-          node2.getPrev().setNext(node2);
-        } 
+        System.out.println("");
+    }
+
+    public static void main(String[] args) {
+        LinkedList newLinkedList = new LinkedList();
+
+        newLinkedList.add("P");
+        newLinkedList.add("A");
+        newLinkedList.add("S");
+        newLinkedList.add("A");
+        newLinkedList.add("A");
+
+        newLinkedList.deleteValue("A");
+        newLinkedList.showAll();
+
     }
 }

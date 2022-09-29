@@ -222,7 +222,7 @@ public class LinkedList {
         length--;
     }
 
-    public void removeDuplicat() {
+    public void removeDuplicate() {
         Node currentNode = this.first;
         Node compareNode = currentNode.getNext();
 

@@ -36,7 +36,7 @@ public class Main {
     list.add("B"); list.showAll();
     list.add("A"); list.showAll();
 
-    list.removeDuplicat();
+    list.removeDuplicate();
 
     list.showAll();
 

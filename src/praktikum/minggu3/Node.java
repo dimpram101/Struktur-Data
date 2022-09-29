@@ -1,11 +1,10 @@
 package praktikum.minggu3;
 
 public class Node {
-    private int value;
+    private String value;
     private Node next;
-    private Node prev;
 
-    public Node(int value) {
+    public Node(String value) {
         this.value = value;
     }
 
@@ -13,19 +12,11 @@ public class Node {
         this.next = next;
     }
 
-    public void setPrev(Node prev) {
-        this.prev = prev;
-    }
-
     public Node getNext() {
-        return this.next;
+        return next;
     }
 
-    public Node getPrev() {
-        return this.prev;
-    }
-
-    public int getValue() {
-        return this.value;
+    public String getValue() {
+        return value;
     }
 }

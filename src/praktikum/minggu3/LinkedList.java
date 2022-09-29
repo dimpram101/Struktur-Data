@@ -1,7 +1,5 @@
 package praktikum.minggu3;
 
-import java.util.function.Function;
-
 public class LinkedList {
     public Node first;
     private int length;
@@ -94,7 +92,18 @@ public class LinkedList {
     }
 
     public void deleteValue(String value) {
-      
+        Node tempNode = first;
+        int index = length;
+
+        for (int i = 0; i < index; i++) {
+            if (tempNode != null) {
+                if (tempNode.getValue() == value) {
+                    remove(i);
+                }
+                tempNode = tempNode.getNext();
+            }
+        }
+
     }
 
     public void deleteDuplicate() {
@@ -117,29 +126,17 @@ public class LinkedList {
     }
 
     public void tailToHead() {
-
+   
     }
 
     public void showAll() {
         Node currentNode = this.first;
-        for (int i = 0; i < length; i++) {
+        for(int i = 0; i < length; i++) {
             System.out.print(currentNode.getValue());
             currentNode = currentNode.getNext();
         }
-        System.out.println("");
+        System.out.println("\n");
     }
 
-    public static void main(String[] args) {
-        LinkedList newLinkedList = new LinkedList();
 
-        newLinkedList.add("P");
-        newLinkedList.add("A");
-        newLinkedList.add("S");
-        newLinkedList.add("A");
-        newLinkedList.add("A");
-
-        newLinkedList.deleteValue("A");
-        newLinkedList.showAll();
-
-    }
 }

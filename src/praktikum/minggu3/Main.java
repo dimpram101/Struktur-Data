@@ -15,8 +15,9 @@ public class Main {
     list.add("E");
     list.showAll();
 
-    list.removeByValue("E");
-
+    // list.removeByValue("E");
+    // list.removeDuplicate();
+    list.tailToHead();
     list.showAll();
   }
 }

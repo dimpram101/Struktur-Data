@@ -1,0 +1,26 @@
+begin 
+
+DEFINE CLASS Node:
+  init value as int
+  init next as Node <- null
+  init prev as Node <- null
+
+  DEFINE CONSTRUCTOR Node(iValue: int):
+    set value <- iValue
+
+  DEFINE METHOD setNext(iNext: Node):
+    set next <- iNext
+  
+  DEFINE METHOD getNext():
+    return next
+  
+  DEFINE METHOD getValue():
+    return value
+
+  DEFINE METHOD setPrev(iPrev: Node):
+    set prev <- iPrev
+  
+  DEFINE METHOD getPrev():
+    return prev
+    
+end

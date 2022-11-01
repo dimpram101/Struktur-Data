@@ -1,0 +1,67 @@
+Pseudocode Stack
+
+begin
+
+DEFINE Class Stack:
+  init first as Node
+  init length <- 0
+
+  DEFINE CONSTRUCTOR:
+    set first <- null
+
+  DEFINE METHOD findNode(int index):
+    init temp as Node <- first
+
+    FOR i to index:
+      set temp <- temp's nextNode
+    ENDFOR
+
+    return temp
+
+  DEFINE METHOD hasPop():
+    IF first is not null THEN:
+      return true
+    ELSE THEN:
+      return false
+    ENDIF
+
+  DEFINE METHOD push(int value):
+    init newNode as Node <- Node(value)
+    set newNode's next to first
+    set first <- node
+    increase length by 1
+
+  DEFINE METHOD pop():
+    IF hasPop() is true THEN:
+      init temp as Node <- first
+      set first <- temp's next
+      decrease length by 1
+      return temp's value
+    ELSE THEN:
+      return 0
+    ENDIF
+
+  DEFINE METHOD pop(int index):
+    IF index is lower or equals to length and hasPop() is true THEN:
+      init temp as Node <- findNode(index-1)
+      init output as Node <- temp's next's value
+      init nextTemp as Node <- temp's next's next
+
+      set temp's next to nextTemp
+      
+      decrease length by 1
+
+      return output
+    ELSE THEN:
+      return 0
+    ENDIF
+
+  DEFINE METHOD showAll():
+    init currentNode as Node <- first
+
+    FOR i = 0 to length:
+      print(currentNode's value)
+      set currentNode <- currentNode's next
+    ENDFOR
+
+end

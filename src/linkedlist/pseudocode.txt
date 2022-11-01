@@ -1,0 +1,222 @@
+Pseudocode LinkedList Bolak-Balik
+
+begin
+
+DEFINE CLASS LinkedList:
+  init first as Node
+  init last as Node
+  init length <- 0
+
+  DEFINE CONSTRUCTOR:
+    set first <- null
+    set last <- null
+
+  DEFINE METHOD getLength():
+    return length
+
+  DEFINE METHOD getFirst():
+    return first
+  
+  DEFINE METHOD getLast():
+    return last
+
+  DEFINE METHOD findNode(int index):
+    IF index equals 0 then return first ENDIF
+    IF index equals length then return last ENDIF
+
+    init currentNode <- first
+    FOR i to index:
+      set currentNode <- currentNode's next
+    ENDFOR
+
+    return currentNode
+
+  DEFINE METHOD add(int value):
+    init newNode as Node <- Node(value)
+
+    IF first equals to null then:
+      set first and last <- newNode
+    ELSE then:
+      set newNode's prev to last
+      set last's next to newNode
+      set last <- newNode
+    ENDIF
+
+    increase length by 1
+
+  DEFINE METHOD insert(int value, int index):
+    init temp as Node <- Node(value)
+    
+    IF index equals 0 then:
+      IF length equals 0 then:
+        set first and last <- 0
+      ELSE
+        set first's prev to temp
+        set temp's next to first
+        set first <- temp
+      ENDIF
+    ELSE THEN:
+      init currentNode as Node <- findNode(index)
+      set temp's prev to the previous Node of currentNode
+      set temp's next to currentNode
+      set the previous Node from currentNode's next to temp
+      set currentNode's prev to temp
+    ENDIF
+    increase length by 1
+  
+  DEFINE METHOD insert(Node node, int index):
+    IF index equals 0 then:
+      IF length equals 0 then:
+        set first and last <- node
+      ELSE
+        set first's prev <- node
+        set node's next <- first
+        set first <- node
+      ENDIF
+    ELSE THEN:
+      init currentNode as Node <- findNode(index)
+      set node's prev to the previous Node of currentNode
+      set node's next to currentNode
+      set the previous Node from currentNode's next to node
+      set currentNode's prev to node
+    ENDIF
+    increase length by 1
+
+  DEFINE METHOD remove(int index):
+    init removedNode as Node <- findNode(index) 
+
+    IF index equals 0 then:
+      set first <- first's next
+      set first's prev <- null
+    ELSE IF index equals to length-1 then:
+      set last <- last's prev
+      set last's next <- null
+    ELSE then:
+      init currentNode as Node <- findNode(index)
+      IF next of currentNode is not null then:
+        set currentNode's prev's next to currentNode's next
+        init prevNode as Node <- currentNode's prev
+        init nextNode as Node <- currentNode's next
+        set nextNode's prev to prevNode
+      ELSE then:
+        set currentNode's prev's next to null
+        set last <- currentNode's prev
+      ENDIF
+    ENDIF
+
+    decrease length by 1
+    return removedNode
+
+  DEFINE METHOD remove(Node node):
+    IF node equals first then:
+      set first <- first's next
+      set first's prev <- null
+    ELSE IF node equals last then:
+      set last <- last's prev
+      set last's next <- null
+    ELSE then:
+      IF node's next is not null then:
+        set node's prev's next to node's next
+        init prevNode as Node <- node's prev
+        init nextNode as Node <- node's next
+        set nextNode's prev to prevNode
+      ELSE then:
+        set node's prev's next to null
+        set last <- node's prev
+      ENDIF
+    ENDIF
+
+    decrease length by 1
+    return removedNode
+
+  DEFINE METHOD swap(int index1,int index2):
+    init node1 as Node <- findNode(index1)
+    init node2 as Node <- findNode(index2)
+
+    IF node1 equals first then:
+      set first <- node2
+    ELSE IF node2 equals first then:
+      set first <- node1
+    ENDIF
+
+    IF node2 equals last then:
+      set last <- node2
+    ELSE IF node2 equals last then:
+      set last <- node1
+    ENDIF
+
+    init tempNode as Node <- node1's next
+    set node1's next to node2's next
+    set node2's next to tempNode
+
+    IF node1's next is not null then:
+      set node1's next's prev to node1
+    ENDIF
+
+    IF node2's next is not null then:
+      set node2's next's prev to node2
+    ENDIF
+
+    set tempNode <- node1's prev
+    set node1's prev to node2's prev
+    set node2's prev to tempNode
+
+    IF node1's prev is not null then:
+      set node1's prev's next to node1
+    ENDIF
+
+    IF node2's prev is not null then:
+      set node2's prev's next to node2
+    ENDIF
+
+  DEFINE METHOD swap(Node node1, Node node2):
+    IF node1 equals first then:
+      set first <- node2
+    ELSE IF node2 equals first then:
+      set first <- node1
+    ENDIF
+
+    IF node2 equals last then:
+      set last <- node2
+    ELSE IF node2 equals last then:
+      set last <- node1
+    ENDIF
+
+    init tempNode as Node <- node1's next
+    set node1's next to node2's next
+    set node2's next to tempNode
+
+    IF node1's next is not null then:
+      set node1's next's prev to node1
+    ENDIF
+
+    IF node2's next is not null then:
+      set node2's next's prev to node2
+    ENDIF
+
+    set tempNode <- node1's prev
+    set node1's prev to node2's prev
+    set node2's prev to tempNode
+
+    IF node1's prev is not null then:
+      set node1's prev's next to node1
+    ENDIF
+
+    IF node2's prev is not null then:
+      set node2's prev's next to node2
+    ENDIF
+
+  DEFINE METHOD showAll():
+    Node currentNode = first
+    FOR i to length:
+      print(currentNode)
+      set currentNode <- currentNode's next
+    ENDFOR
+
+  DEFINE METHOD showPrev():
+    Node currentNode = last
+    FOR length to 0:
+      print(currentNode)
+      set currentNode <- currentNode's prev
+    ENDFOR
+END

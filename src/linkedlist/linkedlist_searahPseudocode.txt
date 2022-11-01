@@ -1,0 +1,84 @@
+Pseudocode LinkedList searah
+
+begin
+
+DEFINE CLASS LinkedList:
+  init first as Node
+  init length <- 0
+
+  DEFINE METHOD CONSTRUCTOR
+
+	DEFINE Constructor:
+		set first <- null
+
+  DEFINE METHOD findNode(int index):
+    IF index < length and index > 0 THEN :
+      init currentNode as Node <- first
+      FOR i until index:
+        set currentNode <- currentNode's next
+      ENDFOR 
+      return current node
+  ELSE THEN:
+    return null
+  ENDIF
+
+  DEFINE METHOD add(int value) :
+    init newNode as Node <- Node(value)
+    IF first equals to null THEN:
+      set first <- newNode
+    ELSE THEN: 
+      init lastNode as Node <- findNode(length-1)
+      set lastNode's next to newNode
+    increase length by 1
+
+  DEFINE METHOD insert (int index, int value):
+    IF index node < length node and index node >= 0 THEN:
+      IF index equals to 0 THEN
+        init newNode as Node <- Node(value)
+        set newNode's next to first
+        set first <- node
+      ELSE THEN:
+        init temp as Node <- Node(value)
+        init beforeIndexNode as Node <- findNode(index-1)
+        init indexNode as Node <- beforeIndexNode's next
+
+        set beforeIndexNode's next to temp
+        set beforeIndexNode's next's next to indexNode
+      ENDIF 
+    ENDIF
+    increase length by 1
+
+  DEFINE METHOD remove (int index):
+    IF index < length and index >= 0 THEN :
+      IF index equals to 0 THEN:
+        init temp as Node <- first
+        set first <- temp's next
+      ENDIF
+    ELSE THEN:
+      init beforeIndexNode as Node <- findNode(index-1)
+      init afterIndexNode as Node <- findNode(index+1)
+      set beforeIndexNode's next to afterIndexNode
+    ENDIF
+    decrease length by1
+
+  DEFINE METHOD swap (int index1, int index2)
+    IF index1 < length and index2 < length and index1 >= 0 and index2 >= 0 THEN:
+      init prevNode1 as Node <- null
+      init prevNode2 as Node <- null
+      init pointerNode1 as Node <- first
+      init pointerNode2 as Node <- first
+
+      WHILE (i1 < index1):
+        set prevNode1 <- pointerNode1
+        set pointerNode1 <- pointerNode1's next
+      ENDWHILE
+    ENDIF
+
+  DEFINE METHOD showAll():
+    init currentNode as Node <- first
+    for i from 0 until index:
+      print(currentNode)
+      set currentNode <- currentNode's next
+    endfor
+
+end

@@ -1,4 +1,4 @@
-package praktikum.minggu3;
+package praktikum.linkedlist;
 
 public class Node {
     private String value;

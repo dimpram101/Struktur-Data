@@ -101,34 +101,120 @@ public class BinarySearchTree {
     if (root != null) {
       sort(root.getLeft());
       System.out.println(root.getValue());
-      sort(root.getRight()); 
+      sort(root.getRight());
     }
-  }
-
-  public Node updateValue(int value, int newValue, Node root) {
-    if (root == null)
-      return null;
-
-    if (value == root.getValue()) {
-      if (root.getLeft() != null && root.getLeft().getValue() > newValue) {
-        return null;        
-      } else if (root.getRight() != null && root.getRight().getValue() < newValue) {
-        return null;
-      }
-      root.setValue(newValue);
-      return root;
-    }
-
-    if (value < root.getValue()) {
-       updateValue(value, newValue ,root.getLeft());
-    } else if (value > root.getValue()) {
-       updateValue(value, newValue ,root.getRight());
-    }
-
-    return root;
   }
 
   public void update(int valueInTree, int newValue) {
-    updateValue(valueInTree, newValue, this.root);
+    if (searchValue(newValue, this.root)) {
+      System.out.println(newValue + " sudah ada di dalam Tree!");
+      return;
+    }
+
+    if (!updateValue(valueInTree, newValue, this.root)) {
+      System.out.println("gagal memperbaharui");
+      return;
+    }
+
+    // balance(this.root);
+  }
+
+  public boolean updateValue(int value, int newValue, Node root) {
+    boolean status = false;
+    if (root == null) {
+      return status;
+    }
+  
+    Node newNode = new Node(newValue);
+    Node tempLeft, tempRight;
+
+    if (root.getRight() != null) {
+      if (value == root.getRight().getValue() && newValue > root.getValue()) {
+        tempLeft = root.getRight().getLeft();
+        tempRight = root.getRight().getRight();
+        root.setRight(newNode);
+        newNode.setLeft(tempLeft);
+        newNode.setRight(tempRight);
+        balance(newValue, this.root);
+        status = true;
+        return status;
+      }
+    }
+
+    if (root.getLeft() != null) {
+      if (value == root.getLeft().getValue() && newValue < root.getValue()) {
+        tempLeft = root.getLeft().getLeft();
+        tempRight = root.getLeft().getRight();
+        root.setLeft(newNode);
+        newNode.setLeft(tempLeft);
+        newNode.setRight(tempRight);
+        balance(newValue, this.root);
+        status = true;
+        return status;
+      } 
+    }
+
+    if(value < root.getValue()) {
+      status = updateValue(value, newValue, root.getLeft());
+    } else if(value > root.getValue()) {
+      status = updateValue(value, newValue, root.getRight());
+    }
+
+    return status;
+  }
+
+  // public void balance(Node root) {
+  //   if (root == null) {
+  //     return;
+  //   }
+    
+  //   if (root.getRight() != null) {
+  //     if (root.getRight().getValue() > root.getRight().getRight().getValue()) {
+  //       int temp = root.getRight().getValue();
+  //       root.getRight().setValue(root.getRight().getRight().getValue());
+  //       root.getRight().getRight().setValue(temp);
+  //       return;
+  //     }
+  //   }
+  //   if (root.getLeft() != null) {
+  //     if (root.getLeft().getValue() < root.getLeft().getLeft().getValue()) {
+  //       Node temp = root.getLeft().getLeft();
+  //       root.setLeft(temp);
+  //       temp.setLeft(temp);
+  //       return;
+  //     }
+  //   }
+  //   balance(root.getRight());
+  //   balance(root.getLeft());
+  // }
+
+  public void balance(int value, Node root) {
+    if (root == null) {
+      return;
+    }
+
+    if (value == root.getValue()) {
+      if (root.getRight() != null) {
+        if (root.getValue() > root.getRight().getValue()) {
+          int temp = root.getValue();
+          root.setValue(root.getRight().getValue());
+          root.getRight().setValue(temp);
+        }
+      } 
+
+      if (root.getLeft() != null) {
+        if (root.getValue() < root.getLeft().getValue()) {
+          int temp = root.getValue();
+          root.setValue(root.getLeft().getValue());
+          root.getLeft().setValue(temp);
+        }
+      }
+    }
+
+    if (value < root.getValue()) {
+      balance(value, root.getLeft());
+    } else if (value > root.getValue()) {
+      balance(value, root.getRight());
+    }
   }
 }

@@ -3,6 +3,7 @@ package praktikum.minggu3;
 public class Main {
   public static void main(String[] args) {
     LinkedList list = new LinkedList();
+<<<<<<< Updated upstream
     // list.add("P");
     // list.add("A");
     // list.add("S");
@@ -44,6 +45,9 @@ public class Main {
 
     // list.showAll();
 
+=======
+    LinkedList list2 = new LinkedList();
+>>>>>>> Stashed changes
     list.add("H");
     list.add("A");
     list.add("L");

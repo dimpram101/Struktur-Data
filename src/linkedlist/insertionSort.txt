@@ -1,0 +1,21 @@
+begin
+
+DEFINE CLASS InsertionSort:
+  init list as LinkedList
+  init length <- 0
+
+  DEFINE METHOD insertionSort():
+    FOR i <- 1 to length:
+      init removedNode as Node <- remove(i) from list
+      init prevRemovedNode as Node <- removedNode's prev
+
+      init insertIndex <- i-1
+
+      WHILE insertIndex >= 0 and prevRemovedNode's value > removedNode's value THEN:
+        prevRemovedNode <- prevRemovedNode's prev
+        decrease insertIndex by 1
+      END WHILE
+      insert(removedNode, insertIndex + 1) to list
+    END FOR
+
+end

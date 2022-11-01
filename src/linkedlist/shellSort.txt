@@ -1,0 +1,46 @@
+begin
+
+DEFINE CLASS AdvancedSort:
+  init list as LinkedList
+  init length as int
+
+  DEFINE CONSTRUCTOR(currentList: LinkedList):
+    set list <- currentList
+    set length <- length of currentList
+
+  DEFINE METHOD shellSort():
+    FOR interval: int <- length/2 downto 1 with division by 2:
+      IF interval equals to 1 THEN:
+        do insertionSort()
+        stop loop
+        ENDFOR
+      ENDIF
+
+      FOR i <- ((length - interval) - 1) to length:
+        FOR j <- i to interval with decrement by j - interval:
+          init node1 as Node <- findNode(j) from list
+          init node2 as Node <- findNode(j-interval) from list
+
+          IF (node2's value > node1's value) THEN:
+            swap(node1, node2) from list
+          ENDIF
+        ENDFOR
+      ENDFOR
+      
+    ENDFOR
+
+  DEFINE METHOD insertionSort():
+    FOR i <- 1 to length:
+      init removedNode as Node <- remove(i) from list
+      init prevRemovedNode as Node <- removedNode's prev
+
+      init insertIndex <- i-1
+
+      WHILE insertIndex >= 0 and prevRemovedNode's value > removedNode's value THEN:
+        set prevRemovedNode <- prevRemovedNode's prev
+        decrease insertIndex by 1
+      END WHILE
+      insert(removedNode, insertIndex + 1) to list
+    END FOR
+
+end

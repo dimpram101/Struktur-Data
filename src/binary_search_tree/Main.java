@@ -17,15 +17,14 @@ public class Main {
     // bst.insert(4);
     bst.insert(13);
     bst.insert(17);
+    System.out.println("Sebelum update");
     bst.show();
-    System.out.println("\nSetelah update\n");
-    bst.update(2, 4);
+    System.out.println("\nSetelah update");
+    // System.out.println("2 -> 4\n54 -> 69\n10 -> 7");
+    // bst.update(2, 4);
+    // bst.update(54, 69);
+    // bst.update(10, 7);
+    // bst.update(13, 15);
     bst.show();
-    // bst.sort(bst.getRoot());
-    // System.out.println();
-    // bst.update(9, 8);
-    // bst.show();
-    // bst.search(11);
-    // bst.show();
   }
 }

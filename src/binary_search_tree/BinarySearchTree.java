@@ -162,32 +162,7 @@ public class BinarySearchTree {
 
     return status;
   }
-
-  // public void balance(Node root) {
-  //   if (root == null) {
-  //     return;
-  //   }
-    
-  //   if (root.getRight() != null) {
-  //     if (root.getRight().getValue() > root.getRight().getRight().getValue()) {
-  //       int temp = root.getRight().getValue();
-  //       root.getRight().setValue(root.getRight().getRight().getValue());
-  //       root.getRight().getRight().setValue(temp);
-  //       return;
-  //     }
-  //   }
-  //   if (root.getLeft() != null) {
-  //     if (root.getLeft().getValue() < root.getLeft().getLeft().getValue()) {
-  //       Node temp = root.getLeft().getLeft();
-  //       root.setLeft(temp);
-  //       temp.setLeft(temp);
-  //       return;
-  //     }
-  //   }
-  //   balance(root.getRight());
-  //   balance(root.getLeft());
-  // }
-
+  
   public void balance(int value, Node root) {
     if (root == null) {
       return;

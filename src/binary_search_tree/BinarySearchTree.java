@@ -82,19 +82,19 @@ public class BinarySearchTree {
     showTree(this.root, 0);
   }
 
-  public void showTree(Node root, int startIndex) {
+  public void showTree(Node root, int indent) {
     if (root == null)
       return;
-    showTree(root.getRight(), startIndex + 1);
-    if (startIndex != 0) {
-      for (int i = 0; i < startIndex - 1; i++) {
+    showTree(root.getRight(), indent + 1);
+    if (indent != 0) {
+      for (int i = 0; i < indent - 1; i++) {
         System.out.print("|    ");
       }
       System.out.println("|----" + root.getValue());
     } else {
       System.out.println(root.getValue());
     }
-    showTree(root.getLeft(), startIndex + 1);
+    showTree(root.getLeft(), indent + 1);
   }
 
   public void sort(Node root) {
@@ -191,5 +191,84 @@ public class BinarySearchTree {
     } else if (value > root.getValue()) {
       balance(value, root.getRight());
     }
+  }
+
+  public boolean delete(int value) {
+    deleteNode(value, this.root);
+
+    return false;
+  }
+
+  public Node deleteNode(int value, Node node) {
+    if (node == null) {
+      return null;
+    }
+
+    Node temp;
+    if (value == node.getRight().getValue()) {
+      temp = node.getRight();
+      node.setRight(temp.getRight());
+      insertNode(temp.getLeft(), this.root);
+      return temp;
+    } else if (value == node.getLeft().getValue()) {
+      temp = node.getLeft();
+      node.setLeft(temp.getRight());
+      insertNode(temp.getLeft(), this.root);
+      return temp;
+    }
+
+    if (value > node.getValue()) {
+      deleteNode(value, node.getRight());
+    } else if (value < node.getValue()) {
+      deleteNode(value, node.getLeft());
+    }
+
+    return node;
+  }
+
+  // public void balance(Node node, Node root) {
+  //   if (root == null) {
+  //     return;
+  //   }
+
+  //   if (node.getValue() == root.getValue()) {
+  //     if (root.getRight() != null) {
+  //       if (root.getValue() > root.getRight().getValue()) {
+  //         int temp = root.getValue();
+  //         root.setValue(root.getRight().getValue());
+  //         root.getRight().setValue(temp);
+  //       }
+  //     } 
+
+  //     if (root.getLeft() != null) {
+  //       if (root.getValue() < root.getLeft().getValue()) {
+  //         int temp = root.getValue();
+  //         root.setValue(root.getLeft().getValue());
+  //         root.getLeft().setValue(temp);
+  //       }
+  //     }
+  //   }
+
+  //   if (node.getValue() < root.getValue()) {
+  //     balance(node, root.getLeft());
+  //   } else if (node.getValue() > root.getValue()) {
+  //     balance(node, root.getRight());
+  //   }
+  // }
+
+  
+
+  public Node insertNode(Node node, Node root) {
+    if (root == null) {
+      root = node;
+      return root;
+    }
+    if (node.getValue() < root.getValue()) {
+      root.setLeft(insertNode(node, root.getLeft()));
+    } else if (node.getValue() > root.getValue()) {
+      root.setRight(insertNode(node, root.getRight()));
+    }
+
+    return root;
   }
 }

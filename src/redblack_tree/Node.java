@@ -10,6 +10,7 @@ public class Node {
     this.value = value;
     this.parent = null;
     this.left = this.right = null;
+    this.isRed = true;
   }
 
   public int getValue() {
@@ -40,8 +41,8 @@ public class Node {
     return this.right;
   }
 
-  public void setIsRed(boolean value) {
-    this.isRed = value;
+  public void setRed(boolean red) {
+    this.isRed = red;
   }
 
   public boolean isRed() {

@@ -16,7 +16,7 @@ public class Main {
     bst.insert(2);
     bst.show();
     System.out.println();
-    bst.delete(8);
+    bst.delete(1);
     bst.show();
 
   }

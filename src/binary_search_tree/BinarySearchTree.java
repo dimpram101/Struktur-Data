@@ -194,9 +194,13 @@ public class BinarySearchTree {
   }
 
   public boolean delete(int value) {
-    deleteNode(value, this.root);
+    if(!searchValue(value, this.root)) {
+      System.out.println(value + " tidak ada di dalam Tree");
+      return false;
+    }
 
-    return false;
+    deleteNode(value, this.root);
+    return true;
   }
 
   public Node deleteNode(int value, Node node) {
@@ -212,7 +216,11 @@ public class BinarySearchTree {
       return temp;
     } else if (value == node.getLeft().getValue()) {
       temp = node.getLeft();
-      node.setLeft(temp.getRight());
+      if (temp.getRight() != null) {
+        node.setLeft(temp.getRight());
+      } else {
+        node.setLeft(null);
+      }
       insertNode(temp.getLeft(), this.root);
       return temp;
     }
